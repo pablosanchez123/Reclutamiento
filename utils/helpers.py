@@ -39,20 +39,14 @@ def limpiar_tabla_cvs():
         conn.commit()
         cur.close()
         conn.close()
-        print("🗑 Tabla 'cvs' limpiada correctamente.")
+        print(" Tabla 'cvs' limpiada correctamente.")
     except Exception as e:
-        print("❌ Error limpiando tabla cvs:", e)
+        print(" Error limpiando tabla cvs:", e)
 
 
 
 def extraer_texto_pdf(ruta_pdf: str) -> str:
-    """
-    Extrae texto de un archivo PDF usando PyMuPDF.
-    Funciona perfecto para PDFs con texto seleccionable.
 
-    :param ruta_pdf: Ruta al archivo PDF.
-    :return: Texto extraído como string.
-    """
     texto_final = []
 
     try:

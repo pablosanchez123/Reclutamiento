@@ -5,6 +5,7 @@ from utils.helpers import extraer_texto_pdf
 from core.candidato_service import guardar_candidato
 from core.candidato import Candidato
 from ui.ventanasApps.HabilidadesReclutador import HabilidadesReclutador
+from db.dbActions import contar_cvs
 from PySide6.QtWidgets import (
     QWidget, QLabel, QPushButton, QFileDialog,
     QVBoxLayout, QHBoxLayout, QLineEdit
@@ -102,12 +103,26 @@ class CargarCandidatos(QWidget):
 
         self.setLayout(layout)
 
+        self.actualizar_conteo_cvs()
+
     def volver_menu_principal(self):
         self.hide()
 
     def configurar_habilidades(self):
         self.ventana_habilidades = HabilidadesReclutador()
         self.ventana_habilidades.show()
+
+    def actualizar_conteo_cvs(self):
+        """Consulta la BD y actualiza el label de archivos cargados."""
+        try:
+            total = contar_cvs()
+            self.archivos_cargados = total
+            self.lbl_cargados.setText(f"Archivos cargados: {total}")
+        except Exception as e:
+            print("Error obteniendo conteo de CVs:", e)
+            self.lbl_cargados.setText("Archivos cargados: ?")
+
+
 
     def _estilo_boton(self):
         return """
