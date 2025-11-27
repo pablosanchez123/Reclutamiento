@@ -1,4 +1,4 @@
-import psycopg2
+
 from db.conexion import get_connection
 
 def insertar_cv(nombre_persona, nombre_archivo, texto_cv):
@@ -22,7 +22,7 @@ def insertar_cv(nombre_persona, nombre_archivo, texto_cv):
         if conn: conn.close()
 
 def contar_cvs():
-    """Devuelve cuántos registros hay en la tabla cvs."""
+
     total = 0
     try:
         conn = get_connection()

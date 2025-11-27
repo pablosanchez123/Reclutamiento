@@ -31,7 +31,7 @@ def limpiarJSON():
 
 
 def limpiar_tabla_cvs():
-    """Borra todos los registros almacenados en la tabla cvs."""
+    #Borra todos los registros de la base de datos
     try:
         conn = get_connection()
         cur = conn.cursor()

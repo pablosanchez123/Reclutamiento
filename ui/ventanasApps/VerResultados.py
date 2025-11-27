@@ -16,7 +16,7 @@ class VerResultados(QWidget):
         self.setFixedSize(900, 500)
         self.setStyleSheet("background-color: #121212; color: white;")
 
-        # ------- Título -------
+        #Título
         self.titulo = QLabel("Ranking de Candidatos")
         self.titulo.setAlignment(Qt.AlignCenter)
         self.titulo.setStyleSheet("""
@@ -25,20 +25,20 @@ class VerResultados(QWidget):
             margin-bottom: 10px;
         """)
 
-        # ------- Etiqueta de estado / mensajes -------
+        #Etiqueta de estado
         self.lbl_estado = QLabel("")
         self.lbl_estado.setAlignment(Qt.AlignCenter)
         self.lbl_estado.setStyleSheet("font-size: 10pt; color: #cccccc; margin-bottom: 5px;")
 
-        # ------- Tabla de resultados -------
+        #Tabla de resultados
         self.tabla = QTableWidget()
-        # Posición, Nombre, Archivo, Puntaje, Similitud raw, Idioma
+        # Posición, Nombre, Archivo, Puntaje, Similitud cruda, Idioma
         self.tabla.setColumnCount(5)
         self.tabla.setHorizontalHeaderLabels([
             "Posición",
             "Nombre",
             "Archivo",
-            "Similitud (%) raw",
+            "Similitud (%)",
             "Idioma CV"
         ])
 
@@ -59,7 +59,7 @@ class VerResultados(QWidget):
             }
         """)
 
-        # ------- Botones -------
+        # Botones
         self.btn_refrescar = QPushButton("Refrescar")
         self.btn_refrescar.setFixedWidth(140)
         self.btn_refrescar.setStyleSheet(self._estilo_boton())
@@ -87,7 +87,7 @@ class VerResultados(QWidget):
         layout_botones.addWidget(self.btn_refrescar)
         layout_botones.addWidget(self.btn_volver)
 
-        # ------- Layout principal -------
+        # Layout principal
         layout_principal = QVBoxLayout()
         layout_principal.setSpacing(10)
         layout_principal.addWidget(self.titulo)
@@ -119,12 +119,12 @@ class VerResultados(QWidget):
             df = ranking_candidatos()
         except Exception as e:
             self.tabla.setRowCount(0)
-            self.lbl_estado.setText(f"❌ Error generando resultados: {e}")
+            self.lbl_estado.setText(f" Error generando resultados: {e}")
             return
 
         if df.empty:
             self.tabla.setRowCount(0)
-            self.lbl_estado.setText("⚠ No hay resultados que mostrar (no hay CVs o habilidades).")
+            self.lbl_estado.setText(" No hay resultados que mostrar (no hay CVs o habilidades).")
             return
 
         self.tabla.setRowCount(len(df))
@@ -151,5 +151,5 @@ class VerResultados(QWidget):
             self.tabla.setItem(fila, 3, item_sim)
             self.tabla.setItem(fila, 4, item_idioma)
 
-        self.lbl_estado.setText("✅ Resultados actualizados correctamente.")
+        self.lbl_estado.setText(" Resultados actualizados correctamente.")
 

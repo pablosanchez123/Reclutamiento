@@ -1,4 +1,4 @@
-# core/candidato_service.py
+
 from core.candidato import Candidato
 from db.dbActions import insertar_cv
 

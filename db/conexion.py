@@ -1,5 +1,5 @@
 import psycopg2
-from psycopg2 import sql
+
 
 def get_connection():
     return psycopg2.connect(
@@ -16,7 +16,7 @@ def probar_conexion():
         cur = conn.cursor()
         cur.execute("SELECT version();")
         version = cur.fetchone()
-        print("✅ Conectado a PostgreSQL:", version[0])
+        print(" Conectado a PostgreSQL:", version[0])
         cur.close()
         conn.close()
     except Exception as e:

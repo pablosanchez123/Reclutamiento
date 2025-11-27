@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from ui.ventanasApps.Menu import MenuPrincipal
- # Asegúrate de tener este archivo en el mismo directorio
+
 
 def iniciar_aplicacion():
     #Inicia la aplicacion de PySide6
