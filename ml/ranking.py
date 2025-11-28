@@ -10,10 +10,7 @@ from db.conexion import get_connection
 
 RUTA_HABILIDADES = "data/config/habilidades_reclutador.json"
 
-
-# ------------------------
-# UTILIDADES
-# ------------------------
+# Dos funciones de utilidad para el sistema
 
 def detectar_idioma(texto: str) -> str:
     """Detecta si el texto está en inglés o español."""
@@ -34,9 +31,8 @@ def traducir(texto: str, destino: str) -> str:
         return texto   # fallback: deja como está
 
 
-# ------------------------
-# CARGA DE DATOS
-# ------------------------
+
+# Funciones de carga de datos
 
 def cargar_cvs_desde_db():
     conn = get_connection()
@@ -61,9 +57,7 @@ def cargar_habilidades():
     return " ".join(palabras)
 
 
-# ------------------------
-# MODELO MULTI-IDIOMA
-# ------------------------
+#Modelo de rankeo
 
 def ranking_candidatos():
     df = cargar_cvs_desde_db()
@@ -74,16 +68,16 @@ def ranking_candidatos():
     for idx, row in df.iterrows():
         cv_texto = row["texto_cv"].lower()
 
-        # 1. Detectar idioma
+        # Detecta idioma
         idioma = detectar_idioma(cv_texto)
 
-        # 2. Preparar habilidades en el idioma correcto
+        # Prepara habilidades en el idioma correcto
         if idioma == "en":
             texto_habilidades = traducir(texto_habilidades_es, "en").lower()
         else:
             texto_habilidades = texto_habilidades_es.lower()
 
-        # 3. Vectorización
+        # Vectorización
         corpus = [cv_texto, texto_habilidades]
         vectorizer = TfidfVectorizer()
         vectores = vectorizer.fit_transform(corpus)
@@ -102,7 +96,7 @@ def ranking_candidatos():
 
     df_out = pd.DataFrame(resultados)
 
-    # Ordenar por similitud descendente
+    # Ordena por similitud descendente
     df_out = df_out.sort_values(by="similitud_raw", ascending=False).reset_index(drop=True)
 
     return df_out
