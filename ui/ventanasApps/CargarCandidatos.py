@@ -113,7 +113,7 @@ class CargarCandidatos(QWidget):
         self.ventana_habilidades.show()
 
     def actualizar_conteo_cvs(self):
-        """Consulta la BD y actualiza el label de archivos cargados."""
+
         try:
             total = contar_cvs()
             self.archivos_cargados = total

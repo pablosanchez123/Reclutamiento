@@ -3,7 +3,7 @@ import psycopg2
 
 def get_connection():
     return psycopg2.connect(
-        host="44.201.68.141",
+        host="13.220.111.18",
         port=5432,
         dbname="reclutamiento_db",
         user="pablo",

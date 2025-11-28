@@ -13,7 +13,7 @@ RUTA_HABILIDADES = "data/config/habilidades_reclutador.json"
 # Dos funciones de utilidad para el sistema
 
 def detectar_idioma(texto: str) -> str:
-    """Detecta si el texto está en inglés o español."""
+
     try:
         idioma = detect(texto)
         if idioma.startswith("en"):
@@ -24,7 +24,7 @@ def detectar_idioma(texto: str) -> str:
 
 
 def traducir(texto: str, destino: str) -> str:
-    """Traduce texto usando GoogleTranslator."""
+
     try:
         return GoogleTranslator(source="auto", target=destino).translate(texto)
     except:
@@ -42,7 +42,7 @@ def cargar_cvs_desde_db():
 
 
 def cargar_habilidades():
-    """Carga habilidades del JSON y las convierte en un texto largo."""
+
     with open(RUTA_HABILIDADES, "r", encoding="utf-8") as f:
         habilidades = json.load(f)
 
